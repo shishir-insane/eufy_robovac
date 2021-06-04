@@ -29,6 +29,7 @@ class WorkMode(StringEnum):
     SMALL_ROOM = 'SmallRoom'
     EDGE = 'Edge'
     SPOT = 'Spot'
+    ZONE = 'zone'
 
 
 class Direction(StringEnum):
@@ -58,6 +59,8 @@ class CleanSpeed(StringEnum):
     STANDARD = 'Standard'
     BOOST_IQ = 'Boost_IQ'
     MAX = 'Max'
+    TURBO = 'Turbo'
+    QUIET = 'Quiet'
 
 
 class ErrorCode(StringEnum):
@@ -105,6 +108,9 @@ class Robovac(TuyaDevice):
 
     async def async_start_cleaning(self, callback=None):
         await self.async_set({self.WORK_MODE: str(WorkMode.AUTO)}, callback)
+
+    async def async_start_zone_cleaning(self, callback=None):
+        await self.async_set({self.WORK_MODE: str(WorkMode.ZONE)}, callback)    
 
     async def async_go_home(self, callback=None):
         await self.async_set({self.GO_HOME: True}, callback)

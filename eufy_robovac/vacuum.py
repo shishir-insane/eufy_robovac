@@ -20,17 +20,25 @@ FAN_SPEED_OFF = 'Off'
 FAN_SPEED_STANDARD = 'Standard'
 FAN_SPEED_TURBO = 'Turbo'
 FAN_SPEED_BOOST_IQ = 'Boost IQ'
+FAN_SPEED_QUIET = 'Quiet'
 FAN_SPEED_MAX = 'Max'
 FAN_SPEEDS = {
     robovac.CleanSpeed.NO_SUCTION: FAN_SPEED_OFF,
     robovac.CleanSpeed.STANDARD: FAN_SPEED_STANDARD,
     robovac.CleanSpeed.BOOST_IQ: FAN_SPEED_BOOST_IQ,
     robovac.CleanSpeed.TURBO: FAN_SPEED_TURBO,
+    robovac.CleanSpeed.QUIET: FAN_SPEED_QUIET,
     robovac.CleanSpeed.MAX: FAN_SPEED_MAX,
 }
 
 
 SUPPORT_ROBOVAC_T2118 = (
+    SUPPORT_BATTERY | SUPPORT_CLEAN_SPOT | SUPPORT_FAN_SPEED | SUPPORT_LOCATE |
+    SUPPORT_PAUSE | SUPPORT_RETURN_HOME | SUPPORT_START | SUPPORT_STATUS |
+    SUPPORT_TURN_OFF | SUPPORT_TURN_ON
+)
+
+SUPPORT_ROBOVAC_T2190 = (
     SUPPORT_BATTERY | SUPPORT_CLEAN_SPOT | SUPPORT_FAN_SPEED | SUPPORT_LOCATE |
     SUPPORT_PAUSE | SUPPORT_RETURN_HOME | SUPPORT_START | SUPPORT_STATUS |
     SUPPORT_TURN_OFF | SUPPORT_TURN_ON
@@ -44,7 +52,7 @@ MODEL_CONFIG = {
     },
     'T2190': {
         'fan_speeds': FAN_SPEEDS,
-        'support': SUPPORT_ROBOVAC_T2118
+        'support': SUPPORT_ROBOVAC_T2190
     }
 }
 
@@ -163,7 +171,7 @@ class EufyVacuum(VacuumEntity):
 
     async def async_turn_on(self, **kwargs):
         """Turn the vacuum on."""
-        await self.robovac.async_set_work_mode(robovac.WorkMode.AUTO)
+        await self.robovac.async_set_work_mode(robovac.WorkMode.ZONE)
 
     async def async_turn_off(self, **kwargs):
         """Turn the vacuum off and return to home."""
@@ -187,3 +195,7 @@ class EufyVacuum(VacuumEntity):
             await self.async_pause()
         else:
             await self.async_play()
+
+    async def async_start_zone_cleaning(self, **kwargs): 
+        """Start the zone cleaning task."""
+        await self.robovac.async_start_zone_cleaning()       
