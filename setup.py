@@ -26,9 +26,9 @@ dynamic_requires = []
 setup(
     name='eufy_robovac',
     version="0.0",
-    author='Richard Mitchell',
+    author='Shishir Kumar',
     author_email='eufy-robovac@mitch.org.uk',
-    url='http://github.com/mitchellrj/eufy_robovac',
+    url='https://github.com/shishir-insane/eufy_robovac',
     packages=find_packages(),
     scripts=[],
     description='Python API for controlling Eufy robotic vacuum cleaners',

@@ -18,12 +18,14 @@ _LOGGER = logging.getLogger(__name__)
 
 FAN_SPEED_OFF = 'Off'
 FAN_SPEED_STANDARD = 'Standard'
+FAN_SPEED_TURBO = 'Turbo'
 FAN_SPEED_BOOST_IQ = 'Boost IQ'
 FAN_SPEED_MAX = 'Max'
 FAN_SPEEDS = {
     robovac.CleanSpeed.NO_SUCTION: FAN_SPEED_OFF,
     robovac.CleanSpeed.STANDARD: FAN_SPEED_STANDARD,
     robovac.CleanSpeed.BOOST_IQ: FAN_SPEED_BOOST_IQ,
+    robovac.CleanSpeed.TURBO: FAN_SPEED_TURBO,
     robovac.CleanSpeed.MAX: FAN_SPEED_MAX,
 }
 
@@ -133,6 +135,8 @@ class EufyVacuum(VacuumEntity):
         elif self.robovac.work_status == robovac.WorkStatus.STAND_BY:
             return STATE_IDLE
         elif self.robovac.work_status == robovac.WorkStatus.COMPLETED:
+            return STATE_DOCKED
+        else:
             return STATE_DOCKED
 
     @property

@@ -536,7 +536,7 @@ class TuyaDevice:
 
     async def async_update_state(self, state_message, _):
         self._dps.update(state_message.payload["dps"])
-        _LOGGER.info("Received updated state {}: {}".format(self, self._dps))
+        _LOGGER.debug("Received updated state {}: {}".format(self, self._dps))
 
     @property
     def state(self):
@@ -577,4 +577,4 @@ class TuyaDevice:
                 raise ConnectionException("Failed to send data to {}".format(
                     self)) from e
             await self.async_connect()
-            await self.async_send(message, retries=retries - 1)
+            await self_.async_send(message, retries=retries - 1)

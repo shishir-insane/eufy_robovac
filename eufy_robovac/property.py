@@ -15,6 +15,9 @@
 # limitations under the License.
 
 import enum
+import logging
+
+_LOGGER = logging.getLogger(__name__)
 
 
 class StringEnum(enum.Enum):
@@ -32,7 +35,7 @@ class DeviceProperty:
 
     def __get__(self, instance, owner):
         value = instance.state.get(self.key)
-        if value is not None and self.type_cast is not None:
+        if value is not None and self.key != '106' and self.type_cast is not None:
             value = self.type_cast(value)
         return value
 

@@ -1,0 +1,7 @@
+{
+  "domain": "eufy_vacuum",
+  "name": "EufyVacuum",
+  "version": "1.1.0",
+  "documentation": "https://github.com/shishir-insane/eufy_robovac",
+  "codeowners": []
+}
